@@ -8,6 +8,6 @@ RSpec.feature "Welcomes", type: :feature do
 
   scenario 'Cheking link create record' do
     visit root_path
-    expect(page).to have_selector 'ul li'
+    expect(find('ul li')).to have_link 'Create Clients'
   end
 end
