@@ -135,4 +135,24 @@ RSpec.feature "Customers", type: :feature do
 
   end
 
+
+  scenario 'Should delete client in link ', js: true do
+
+    customer = Customer.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['Y', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/avatar.png"
+    )
+    visit customers_path
+
+    find(:xpath, "/html/body/table/tbody/tr[1]/td[4]/a").click
+    page.driver.browser.accept_js_confirms
+    1.second
+    expect(page).to have_content 'Client deleted with successfully'
+
+
+  end
+
 end
