@@ -19,7 +19,7 @@
           <%= customer.name %>
         </td>
         <td><%= link_to 'Show', customer_path(customer) %></td>
-        <td>Editar</td>
+        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
       </tr>
     <% end %>
   </tbody>
