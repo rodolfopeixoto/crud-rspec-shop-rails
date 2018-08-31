@@ -1,4 +1,7 @@
 class CustomersController < ApplicationController
+  
+  before_action :set_customer, only: [:show, :edit, :update]
+
   def index
     @customers = Customer.all
   end
@@ -18,16 +21,12 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @customer = Customer.find(params[:id])
   end
 
   def edit
-    @customer = Customer.find(params[:id])
   end
 
-  def update    
-    @customer = Customer.find(params[:id])
-
+  def update
     if @customer.update(customer_params)
       redirect_to customer_path(@customer.id), notice:'Client update successfully'
     else
@@ -38,8 +37,12 @@ class CustomersController < ApplicationController
 
   private
 
-  def customer_params
-    params.require(:customer).permit(:name, :email, :smoler, :phone, :avatar)
-  end
+    def set_customer  
+      @customer = Customer.find(params[:id])
+    end
+  
+    def customer_params
+      params.require(:customer).permit(:name, :email, :smoler, :phone, :avatar)
+    end
 
 end
