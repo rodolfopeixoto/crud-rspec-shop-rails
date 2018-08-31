@@ -8,6 +8,8 @@
       <td>
         Nome
       </td>
+      <td></td>
+      <td></td>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +18,8 @@
         <td>
           <%= customer.name %>
         </td>
+        <td><%= link_to 'Show', customer_path(customer) %></td>
+        <td>Editar</td>
       </tr>
     <% end %>
   </tbody>

@@ -93,7 +93,7 @@ RSpec.feature "Customers", type: :feature do
     )
 
     new_name = Faker::Name.name
-    
+
     visit edit_customer_path(customer.id)
     fill_in 'customer_name', with: new_name
 
@@ -101,6 +101,22 @@ RSpec.feature "Customers", type: :feature do
 
     expect(page).to have_content 'Client update successfully'
     expect(page).to have_content new_name
+  end
+
+  scenario '' do
+    customer = Customer.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['Y', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/avatar.png"
+    )
+
+
+    visit customers_path
+    find(:xpath, "/html/body/table/tbody/tr[1]/td[2]/a").click
+    expect(page).to have_content 'Showing client'
+
   end
 
 end
